@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                     al.clear();
                     al.addAll(dbh.getAllNotes());
                     aa.notifyDataSetChanged();
+                    etContent.setText("");
                     Toast.makeText(MainActivity.this, "Insert successful!", Toast.LENGTH_SHORT).show();
                 }
 

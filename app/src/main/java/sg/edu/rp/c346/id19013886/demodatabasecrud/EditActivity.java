@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class EditActivity extends AppCompatActivity {
 
@@ -38,9 +39,17 @@ public class EditActivity extends AppCompatActivity {
             public void onClick(View v) {
                 DBHelper dbh = new DBHelper(EditActivity.this);
                 data.setNoteContent(etContent.getText().toString());
-                dbh.updateNote(data);
+                //dbh.updateNote(data);
                 dbh.close();
-                finish();
+
+                long updatedID = dbh.updateNote(data);
+
+                if (updatedID != -1) {
+                    Toast.makeText(EditActivity.this, "Update successful!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(EditActivity.this, "ID not found! Update fail!", Toast.LENGTH_SHORT).show();
+                }
+                //finish();
             }
         });
 
@@ -48,8 +57,17 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DBHelper dbh = new DBHelper(EditActivity.this);
-                dbh.deleteNote(data.getId());
-                finish();
+                //dbh.deleteNote(data.getId());
+
+                long deletedID = dbh.deleteNote(data.getId());
+
+                if (deletedID != -1) {
+                    Toast.makeText(EditActivity.this, "Delete successful!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(EditActivity.this, "ID not found! Delete fail!", Toast.LENGTH_SHORT).show();
+                }
+
+                //finish();
             }
         });
 
